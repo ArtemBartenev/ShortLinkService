@@ -41,7 +41,7 @@ func (h *Handler) createShortURL(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if request.OriginalURL == "" {
-		http.Error(w, "Field \"OriginalURL\" cant be empty.", http.StatusBadRequest)
+		http.Error(w, "Field \"OriginalURL\" cant be empty.", http.StatusUnprocessableEntity)
 	}
 
 	link := entity.NewLink()
