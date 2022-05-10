@@ -7,13 +7,14 @@
 ## API
 
 ### Сокращение и сохранение ссылки.
-```http request
-POST http://localhost:8080/v1/short/url
-```
 
 Успех - 200
 <br>
 Запрос
+```http request
+POST http://localhost:8080/v1/short/url
+```
+Тело запроса
 ```json
 {
   "originalURL": "https://github.com/ArtemBartenev/ShortLinkService"
@@ -26,6 +27,7 @@ POST http://localhost:8080/v1/short/url
 ```
 #### Неуспешные
 422
+Тело запроса
 ```json
 {
   "originalURL": ""
@@ -62,7 +64,7 @@ GET http://localhost:8080/v1/short/url?shortURL=http://localhost:8000/kfv2
 GET http://localhost:8080/v1/short/url
 ```
 Ответ
-```http request
+```text
 ShortURL parameter is missing
 ```
 
