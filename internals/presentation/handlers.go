@@ -29,7 +29,10 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		h.createShortURL(w, r)
 	} else if r.Method == "GET" {
 		h.getOriginalURL(w, r)
+	} else {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 	}
+
 }
 
 func (h *Handler) createShortURL(w http.ResponseWriter, r *http.Request) {
