@@ -2,7 +2,6 @@ package presentation
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 	"time"
 )
@@ -11,9 +10,9 @@ type Server struct {
 	httpServer *http.Server
 }
 
-func (s *Server) LaunchServer(port string, handler http.Handler) error {
+func (s *Server) LaunchServer(handler http.Handler) error {
 	s.httpServer = &http.Server{
-		Addr:         fmt.Sprintf(":%s", port),
+		Addr:         ":8000",
 		Handler:      handler,
 		WriteTimeout: 10 * time.Second,
 		ReadTimeout:  10 * time.Second,

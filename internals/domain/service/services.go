@@ -36,7 +36,7 @@ func (s *LinkService) ConvertOriginalURLToShortURL(link *entity.Link) (string, e
 	link.ShortURL += encoding.GenerateStringByBase62()
 	s.repository.Add(link)
 
-	return ShortURL, nil
+	return link.ShortURL, nil
 }
 
 func (s *LinkService) GetOriginalURLByShortURL(link *entity.Link) (string, error) {

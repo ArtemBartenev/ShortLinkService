@@ -8,9 +8,10 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DB_URL=postgres://${DB_USER}:${DB_PASSWORD}@short_link_db:5432/${DB_DATABASE}
+      - DB_URL=postgres://${DB_USER}:${DB_PASSWORD}@short_link_db:5432/${DB_DATABASE}?sslmode=disable
     depends_on:
-      - short_link_db
+      short_link_db:
+        condition: service_healthy
     networks:
       - short_link_network
 
@@ -18,7 +19,7 @@ services:
     image: postgres:12-alpine
     container_name: short_link_db
     ports:
-      - 5432:5432
+      - "8001:5432"
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -28,7 +29,7 @@ services:
     networks:
       - short_link_network
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready" ]
+      test: [ "CMD-SHELL", "pg_isready", "-U", "${DB_USER}", "-d", "${DB_NAME}"]
       interval: 10s
       timeout: 5s
       retries: 5
